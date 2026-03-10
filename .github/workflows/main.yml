@@ -1,0 +1,38 @@
+name: COBOL CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build-test-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Install COBOL Compiler
+      run: |
+        sudo apt update
+        sudo apt install -y gnucobol
+
+    - name: Build COBOL Program
+      run: |
+        chmod +x build.sh
+        ./build.sh
+
+    - name: Run Unit Test
+      run: |
+        chmod +x tests/test_hello.sh
+        ./tests/test_hello.sh
+
+    - name: Simulated Deploy to z/OS
+      run: |
+        echo "Simulating deployment to z/OS"
+        mkdir zos-loadlib
+        cp hello zos-loadlib/
+        echo "Program deployed"
