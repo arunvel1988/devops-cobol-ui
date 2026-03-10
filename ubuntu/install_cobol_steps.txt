@@ -1,0 +1,26 @@
+######################################################
+
+
+sudo apt update -y
+sudo apt install gnucobol -y
+
+cobc -V
+###############
+nano hello.cob
+
+IDENTIFICATION DIVISION.
+PROGRAM-ID. HELLO.
+
+PROCEDURE DIVISION.
+DISPLAY "Hello Arun! Welcome to COBOL on Ubuntu".
+STOP RUN.
+
+###################
+
+cobc -x hello.cob
+
+##########
+
+./hello
+
+###########
